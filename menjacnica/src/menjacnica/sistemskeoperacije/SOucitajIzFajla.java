@@ -10,12 +10,14 @@ import menjacnica.Valuta;
 public class SOucitajIzFajla {
 	
 	public static LinkedList<Valuta> izvrsi(String putanja) {
-		try{
-			ObjectInputStream in = new ObjectInputStream(
-					new BufferedInputStream(new FileInputStream(putanja)));
-			
-			return (LinkedList<Valuta>)(in.readObject());
-		}catch(Exception e){
+		try (ObjectInputStream in = 
+				new ObjectInputStream(
+						new BufferedInputStream(
+								new FileInputStream(putanja)))) {
+
+			return (LinkedList<Valuta>) (in.readObject());
+
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
